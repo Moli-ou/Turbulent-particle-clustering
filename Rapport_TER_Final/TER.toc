@@ -1,0 +1,19 @@
+\babel@toc {english}{}
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}% 
+\contentsline {section}{\numberline {2}Inertial particles in turbulence and direct numerical simulation }{4}{section.2}% 
+\contentsline {subsection}{\numberline {2.1}Governing equations and characteristic parameters }{5}{subsection.2.1}% 
+\contentsline {subsection}{\numberline {2.2}Description of the data sets }{6}{subsection.2.2}% 
+\contentsline {section}{\numberline {3}Statistical tools and Voronoi tesselation }{8}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}Density of randomly distributed particules}{8}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2}Voronoi tesselation}{9}{subsection.3.2}% 
+\contentsline {subsubsection}{\numberline {3.2.1}Construction of the Voronoi diagram}{10}{subsubsection.3.2.1}% 
+\contentsline {paragraph}{General definitions of Voronoi diagrams}{10}{section*.2}% 
+\contentsline {paragraph}{Voronoi diagram in $\mathbb {R}^2$}{11}{section*.3}% 
+\contentsline {paragraph}{Delaunay triangulation in $\mathbb {R}^2$}{11}{section*.4}% 
+\contentsline {paragraph}{From Delaunay to Voronoi in $\mathbb {R}^d$}{12}{section*.5}% 
+\contentsline {subsubsection}{\numberline {3.2.2}Area of Voronoi cells of randomly distributed particules}{13}{subsubsection.3.2.2}% 
+\contentsline {subsection}{\numberline {3.3}Monte-Carlo simulation of particles}{14}{subsection.3.3}% 
+\contentsline {section}{\numberline {4}Analysis of clustering of intertial particles in turbulence}{15}{section.4}% 
+\contentsline {subsection}{\numberline {4.1}Inertial particles in turbulence}{15}{subsection.4.1}% 
+\contentsline {subsection}{\numberline {4.2}Inertial particules in turbulence}{18}{subsection.4.2}% 
+\contentsline {section}{\numberline {5}Conclusion}{22}{section.5}% 

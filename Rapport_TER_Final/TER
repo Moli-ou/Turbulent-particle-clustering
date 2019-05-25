@@ -1,0 +1,716 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsthm,amsmath,amssymb,amsfonts}
+\usepackage{tikz}
+\usepackage{float} 
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+
+\usepackage{svg}
+\usepackage{amsmath}
+\usepackage{lipsum}
+
+
+\usepackage[french,english]{babel}
+\newtheorem{theorem}{{\bf Theorem}}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{corollary}{{\bf Corollaire}}
+\newtheorem{lemma}{{\bf Lemme}}
+\newtheorem{proposition}{{\bf Proposition}}
+\newtheorem{definition}{{\bf Definition}}
+\newtheorem{propertie}{{\bf Proposition}}
+\newtheorem{demonstration}{{\bf Proof}}
+\newtheorem{remarque}{{\bf Note}}
+\textwidth = 16.5cm
+\textheight = 21.3cm
+\topmargin = 0.cm
+\evensidemargin = 0.cm
+\oddsidemargin = 0.cm
+
+\usepackage{geometry}
+\geometry{hmargin=2.5cm,vmargin=2.5cm}
+
+%\renewcommand{\theequation}{{\rm\thesection.\arabic{equation}}}
+
+\begin{document}
+
+
+\title{ 
+	\vspace{1cm}
+	\includegraphics{aix.png}
+	\vspace{5cm}
+	\\\rule{15cm}{0.5mm}
+	\textbf{Statistical analyses and Voronoi\\ tesselation to study inertial particle clustering in turbulence.}
+	\\\rule{15cm}{0.5mm}
+	\vspace{3cm}
+}
+
+\date{}
+\maketitle
+
+\begin{minipage}{0.4\textwidth}
+	\begin{flushleft} \large
+		OUJIA \textsc{Thibault Moli}\\
+		\textsc{Master 1} 2018-2019\\
+		\date{\today}\\
+	\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+	\begin{flushright} \large
+		\emph{Encadrants :}    Prof. Kai Schneider~\\
+		Dr. Keigo Matsuda\\
+		~
+	\end{flushright}
+\end{minipage}
+
+
+\newpage
+
+
+\vspace*{\stretch{1}}
+\begin{center}
+	\textbf{Acknowledgements}\\
+\end{center}
+
+\begin{minipage}{0.9\textwidth}
+	Acknowledgements
+\end{minipage}%
+\\\\\\\\\\\\\\
+\begin{center}
+	\textbf{Abstract}\\
+\end{center}
+
+\begin{minipage}{0.9\textwidth}
+	Abstract 
+\end{minipage}%
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+\vspace*{\stretch{1}}
+
+
+
+\newpage
+
+\tableofcontents 
+
+\newpage
+
+\section{Introduction}
+The role of clouds in the Earth's heat and water systems is significant.
+A large number of observations are made, using e.g. radar reflectometry, to study the microphysical properties of clouds. Radar is a tool that can provide two- or three-dimensional estimates of these properties. These investigations suggest that turbulence plays a keyrole and has strong impact on the properties obtained from radar observations. For example the radar reflectivity factor increases significantly due to the formation of turbulent clusters. However, until now, there was no reliable way to estimate this influence. The objective of the study whose data \cite{Keigo} we will study, was to analyze the impact of microscale turbulent clustering on the radar reflectivity factor by means of direct numerical simulation and to construct a reliable model for estimating it. 
+\\Starting with point particles, which are arranged randomly in a cube filled with a fluid and with a density satisfying a Poisson distribution, we apply a fully developed turbulent flow. After a given time and depending on the parameters, we can observe that void areas form and areas where the particles are grouped together, so called particle clusters. The different parameters used are the Reynolds number that characterizes the turbulence intensity, and the Stokes number that characterizes the inertia and thus the ability of a particle to follow the motion of the fluid. The purpose of this research project (TER : Travail Encadr\'e de Recherche) is to quantify the void areas of the direct numerical simulation data of \cite{Keigo} and to characterize the clustering using statistical tools. To do this, we will use two methods: density estimation and Voronoi tesselation for different Reynolds number and Stokes number values. The analyzes are based on direction umerical simulation data from \cite{Keigo} and the scientific articles of our research tutors.
+\\The remainder of the report is organized as follows. 
+In the second section, we will look at the physical principles that govern the simulation and a description of the data set.
+In the third section, we show that the density of uniformly distributed random particles gives a Poisson distribution. Then we will see the construction of Voronoi diagrams. We also prove that the volume distribution of the corresponding Voronoi tesselation satisfies a Gamma distribution in 1D. We confirm the previous results via Monte-Carlo simulations in 2D for density and in 3D for Voronoi tesselation.
+Finally, in the fourth section, we will analyze using the two tools precisely seen, the distribution of inertial particles in turbulence for different numbers of Stokes and Reynolds.
+
+
+
+
+
+
+\section{Inertial particles in turbulence and direct numerical simulation
+}
+
+In this section we will present the physical principles of fluid mechanics that govern the numerical experiment, then we briefly describe how the data were produced by our research tutors and present visualization of the particle clouds to illustrate the properties for different parameters.
+
+\subsection{Governing equations and characteristic parameters
+}
+
+The droplet arrangement in this cube depends on different physical factors, which we will define, mainly the Stokes and Reynolds number.
+
+\begin{definition}
+~~3-Torus $T^3$
+\\We consider a 3D torus which corresponds to a periodic cube. We can define it as : $T^3=S^1\times S^1\times S^1$ where $S^1$ is the unit circle.
+\end{definition}
+
+
+\begin{definition}
+~~Reynolds number
+\\The Reynolds number  characterizes a flow, in particular the nature of its regime (laminar, transitional, turbulent) and therefore its degree of turbulence. Thus, for a strong turbulence, the Reynolds number will be large. The Reynolds number is defined as such:
+$$ Re=\frac{V\times L}{\nu} $$
+\\where :
+\\$V$ is the velocity of the fluid with respect to the object $(m/s)$
+\\$L$ is a characteristic length scale $(m)$
+\\$\nu$ is the kinematic viscosity of the fluid $(m^2/s)$
+\end{definition}
+
+\begin{definition}
+~~Kolmogorov scale
+\\The smallest length scale in turbulent flow is called Kolmogorov scale and is denoted by $\eta$.
+\end{definition}
+
+\begin{definition}
+~~Time scales
+\\In physics, a time constant, denoted $\tau$, is a quantity that characterizes the speed of the evolution of a physical quantity over time.
+\end{definition}
+
+\begin{definition}
+~~Viscous time scales
+\\Time $\tau_{viscous}$ is the characteristic duration of the exponential decrease in the velocity of a particle subjected to viscous friction.
+$$\tau_{viscous}=\frac{\rho\times d^2}{18\times\mu}$$
+\\where :
+\\$\rho$ is the density of the particle
+\\$d$ is the characteristic length of the particle
+\\$\mu$ is the dynamic viscosity of the fluid
+\end{definition}
+
+\begin{definition}
+~~Inertial time scale
+\\Time $\tau_{inertia}$ is the characteristic duration time of inertia.
+$$\tau_{inertia}=\frac{L}{v}$$
+\\where :
+\\$v$ is the fluid velocity
+\\$L$ is the characteristic lengt
+\end{definition}
+
+\begin{definition}
+~~Stokes number
+\\The Stokes number is used to study the behaviour of a particle in a fluid.  It represents the ratio between the kinetic energy of the particle and the energy dissipated by friction with the fluid. Thus, the Stokes number characterizes the inertia of a particle in a fluid. The more inertia a particle has, the larger the Stokes number will be. If $St=0$ the particle has no mass and we call it a fluid particle.. The Stokes number is defined as :
+$$St=\frac{\tau_{viscous}}{\tau_{inertia}}$$
+\end{definition}
+{\noindent
+There are two different regimes:
+\\- The viscous regime $(St < 1)$ : the particles follow the motion of the fluid.
+\\- The inertial regime $(St > 1)$ : the particles are entrained by their inertia and their trajectory is not very influenced by the motion of the fluid.
+}
+
+
+\begin{definition}
+~~Navier-Stokes equations
+\\The governing equations of turbulent flow are the continuity and momentum equations, called Navier-Stokes equations for three dimensional incompressible flows:
+$$\frac{\partial u_i}{\partial x_i}=0$$
+$$\frac{\partial u_i}{\partial t}+\frac{\partial u_i u_j}{\partial x_j}=-\frac{1}{\rho_a}\frac{\partial p}{\partial x_i}+\nu\frac{\partial^2u_i}{\partial x_j^2}+F_i$$
+\\where :
+\\$u_i$ is the fluid velocity in the $i$th direction
+\\$\rho_a$ is the air density
+\\$p$ is the pressure
+\\$\nu$ is the kinematic viscosity
+\\$F_i$ is the external forcing term.
+\end{definition}
+
+
+
+
+\subsection{Description of the data sets
+}
+
+
+
+In this simulation we have :
+$$
+Re_\lambda = \frac{l_\lambda u_{rms}}{\nu} ~~~~~~~~~~~~~~~~~~~~ St=\frac{\tau_p}{\tau_\eta}$$
+where : 
+\\$l_\lambda$ is Taylor microscale
+\\$u_{rms}$ is RMS value of velocity fluctuation
+\\$\nu$ is kinematic viscosity
+\\$\tau_p$ is relaxation time of droplet motion
+\\$\tau_\eta$ is Kolmogorov time
+\\\\The simulation is done in a periodic cube with side length $2\pi$ and with the 3 pairs of opposite faces glued, so this is a 3-torus. The medium is considered isotropic, i.e. it has the same properties in all directions. The data we will study were simulated in an environment without gravity in order not to alter the isotropic nature of the environment. We take a large number of inertial particles, i.e. with a higher density than the fluid, with a random spatial distribution that follows a Poisson probability distribution function (PDF) and consider them as Stokes particles. Collisions between particles will be neglected. Simulation data for values from St=0.05, 0.2, 0.5, 1.0, 2.0 and 5.0 at Re=204 are analyzed.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{St005_image.eps}
+\caption{Spatial distribution of droplets for $St=0.005,0.02,1,5$ at $Re_\lambda=204$ for a slice of thickness $\frac{2*\pi}{200}$}
+\label{Spatial_distribution_of_dropets_St}
+\end{figure}
+
+In the Figure~\ref{Spatial_distribution_of_dropets_St}, for St = 1.0, we can clearly observe void areas. For St < 1.0, the void areas are less clear. For St > 1.0, they are larger but less clear than St = 1.0. We can ask ourselves how to quantify the clustering in fonction of the Stokes and Reynolds number using statistical tools.
+\\\\We will also study a turbulence of $Re_\lambda=328$, to compare the influence of the Reynolds number on the distribution of particules.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{Re328_image.png}
+\caption{Spatial distribution of dropets for $St=1$ at (a)$Re_\lambda=204$ and  (b)$Re_\lambda=328$ for a slice of thickness $\frac{2*\pi}{200}$}
+\label{Spatial_distribution_of_dropets_Re}
+\end{figure}
+
+In figure~\ref{Spatial_distribution_of_dropets_Re}, we can see that cluster size are smaller for $Re_\lambda=328$ than $Re_\lambda=204$, i.e. when it is more turbulent, vortex tubes are smaller.
+
+
+
+
+
+
+\section{Statistical tools and Voronoi tesselation
+}
+
+
+
+
+
+\subsection{Density of randomly distributed particules}
+
+We will compute the particle density following an uniform distribution, knowing that this is the initial condition before the turbulence.
+To compute the density estimation using histogram, we have cut domain in boxes and counting the number of particles per boxes. 
+
+\begin{propertie}
+The density of uniformly distributed particles follows a Poisson distribution.
+$$B(n,p)=P(\lambda) \text{ with $\lambda=np$}$$ where n is the number of particules and p is $1$ divided by the numbers of boxes.
+\end{propertie}
+
+
+
+\begin{demonstration} 
+
+
+The density of an uniform distribution follows a binomial distribution because we independently repeat several identical random experiments.
+Let X follow a binomial distribution with parameter n and p.
+\\\\Let $\lambda=np$, then we have :
+
+\begin{align*}
+\mathbb{P}(X=k) &= {\dbinom{n}{k}}p^k(1-p)^{n-k} \\ 
+&=\frac{n!}{k!(n-k)!}\left(\frac{\lambda}{n}\right)^k \left(1-\frac{\lambda}{n}\right)^{n-k}  \\
+&=\frac{\lambda^k}{k!}\frac{n!}{(n-k)!}\frac{1}{n^k} \left(1-\frac{\lambda}{n}\right)^{n-k}
+~~ = ~~\frac{\lambda^k}{k!}\frac{n!}{(n-k)!}\frac{1}{n^n} (n-k)^{n-k}
+\end{align*} 
+
+Stirling's approximation give us : $$ n!\approx \sqrt{2\pi n}\left( \frac{n}{e}\right)^n $$
+$$ \frac{n!}{(n-k)!}\approx \sqrt{\frac{n}{n-k}}\frac{n^n}{(n-k)^{n-k}}e^{-k} $$
+
+Considering the limit when the particle number tends to infinity we get :
+
+\begin{align*}
+\lim\limits_{n \rightarrow +\infty} \frac{\lambda^k}{k!}\frac{n!}{(n-k)!}\frac{1}{n^n} (n-k)^{n-k} 
+&=\lim\limits_{n \rightarrow +\infty}  \frac{\lambda^k}{k!} \sqrt{\frac{n}{n-k}}\frac{n^n}{(n-k)^{n-k}}e^{-k} \frac{1}{n^n} 
+(n-k)^{n-k} \\ 
+&=\lim\limits_{n \rightarrow +\infty} \frac{\lambda^k}{k!} \left( \frac{n-\lambda}{n-k}\right)^{n-k}e^{-k}
+\end{align*} 
+
+
+\[ \left( \frac{n-\lambda}{n-k}\right)^{n-k}=e^{(n-k) ln\left( \frac{n-\lambda}{n-k} \right)} \text{and we know that } ln(1+x)\approx x \text{ when }  x\rightarrow 0 \]
+\[ \text{So } \lim\limits_{n \rightarrow +\infty} ln\left( \frac{n-\lambda}{n-k} \right) = \frac{n-\lambda}{n-k} -1 =\frac{k-\lambda}{n-k} \text{ and } \lim\limits_{n \rightarrow +\infty} e^{(n-k) ln\left( \frac{n-\lambda}{n-k} \right)}= e^{\lambda+k}\]
+\\And $$\lim\limits_{n \rightarrow +\infty} \frac{\lambda^k}{k!} \left( \frac{n-\lambda}{n-k}\right)^{n-k}e^{-k} = \frac{\lambda^k}{k!} e^{-\lambda}$$
+\\We can conclude that when $n\rightarrow +\infty$ and $p\rightarrow 0$ with $\lambda$ a finite number : $$B(n,p)=P(np)=P(\lambda)$$
+
+
+\end{demonstration}
+
+
+
+
+
+
+
+\subsection{Voronoi tesselation}
+
+The Voronoi tesselation is interesting and useful because the area of cells depends on the position of particules, in contrast to the density approch which depends on the size of the boxes.
+
+
+\subsubsection{Construction of the Voronoi diagram}
+
+A Voronoi diagram is a paving of the plane built from a finite number of points, called sites or germs. For each germ $p_i$, a Voronoi cell is the group of points of the plane that are closer to the germ $p_i$ than to all the other germs in the plane. The paving of the plane by Voronoi cells is called a Voronoi diagram. This diagram is named after the Russian mathematician Georgi Fedoseevich Voronoi (1868 - 1908). Voronoi diagrams are used in many disciplines and have many applications (robotics, biology, plant growth, medical imaging...). A Voronoi cell delimits the area of influence of a point. Note that Voronoi diagrams can be generalized to other spaces and norms.
+
+\begin{figure}[H]
+\centering
+\includegraphics{test_60point.png}
+\caption{Voronoi diagram with 60 germs}
+\label{Voro_ex}
+\end{figure}
+
+\paragraph{General definitions of Voronoi diagrams}
+$$ $$
+{\noindent
+We suppose to know the coordinates of a set of points $P=\{p_i,1\leq i\leq n\}$ of $\mathbb{R}^d$. 
+}
+
+\begin{definition}
+~~Voronoi cells
+\\We call Voronoi cell of the point $p_i\in P$, which is noted $C_i$, all the points of the space closer to $p_i$ than all the other points of P : $C_i=\{q\in \mathbb{R}^d, \forall j, ||qp_i||\leq ||qp_j||\}$. The point $p_i$ associated with the cell $C_i$ is called the germ of this cell.
+\end{definition}
+
+\begin{definition}
+~~Voronoi diagrams 
+\\We call Voronoi diagram of the set $P$,  the cutting of the space in cell $C_i$ associated to the points.
+\end{definition}
+
+\begin{definition}
+~~Convex set
+\\A set C in $\mathbb{R}^d$ is said to be convex if, $\forall (a,b)\in C\times C, \forall t \in [0,1],ta+(1-t)b\in C $
+\end{definition}
+
+{\noindent
+Afterwards we will use the Euclidean norm.
+}
+
+\paragraph{Voronoi diagram in $\mathbb{R}^2$}
+
+
+\begin{definition}
+~~Voronoi vertex and edge 
+\\The intersection of two Voronoi cells is empty or equal to a segment, a
+half right, or a right. In the latter three cases, this intersection will be called Voronoi edge. The intersection of two Voronoi edge, if it is not empty, is called the Voronoi vertex.
+\end{definition}
+
+{\noindent
+A Voronoi diagram shows the following properties :
+}
+
+\begin{propertie}
+A Voronoi edge, separating two Voronoi cells $C_i$ and $C_j$, is the perpendicular bisector $p_ip_j$.
+\end{propertie}
+
+\begin{demonstration}
+All points on this Voronoi edge are at equal distance of $p_i$ and $p_j$. So they are on the perpendicular bisector $p_ip_j$.
+\end{demonstration}
+
+\begin{propertie}
+The Voronoi vertex common to three cells $C_i$, $C_j$ and $C_k$ is the centre of the circumscribed circle to the triangle of vertices $p_i$, $p_j$ and $p_k$.
+\end{propertie}
+
+\begin{demonstration}
+The intersection points of two Voronoi edges are on the perpendicular bisector $p_ip_j$ and $p_jp_k$, so it is the center of the circumscribed circle.
+\end{demonstration}
+
+\begin{remarque}
+If the points $p_i$, $p_j$ and $p_k$ are aligned, the perpendicular bisector $p_ip_j$ and $p_ip_k$ are parallel. The Voronoi vertex does not exist.
+\end{remarque}
+
+\begin{propertie}
+A Voronoi diagram is a convex subdivision of plane. A bounded  Voronoi cell is a polygon.
+\end{propertie}
+
+\begin{demonstration}
+$C_i$ is the intersection of a finite number of half-plane, so it is a convex region. The border is made up of a series of Voronoi edges and Voronoi vertex. If $C_i$ is bounded, its boundary is closed; $C_i$ is therefore a convex polygon.
+\end{demonstration}
+
+
+
+\paragraph{Delaunay triangulation in $\mathbb{R}^2$}
+$$ $$
+Like the Voronoi diagrams, Delaunay triangulation is a division of the plane into cells associated with points $p_i\in P$. The Delaunay triangulation of a set of points $p_i\in P$ of the plane is a triangulation $T$ such that no point of $P$ is inside the circumscribed circle of one of the triangles of T. This triangulation was invented by the Russian mathematician Boris Delaunay (1890 - 1980) in an article published in 1934.
+
+
+\begin{definition}
+~~Delaunay triangle
+\\We call Delaunay triangle, a triangle noted $D_i$, which has as vertex three of the germs $p_a,p_b,p_c \in P$ and such that its circumscribed circle has no germs inside it.
+\end{definition}
+
+\begin{definition}
+~~Delaunay triangulation
+\\We call Delaunay triangulation of the set $P$, the cutting of the plane in cell $D_i$, i.e. all the Delaunay triangles associated with the points $P$.
+\end{definition}
+
+\begin{figure}[H]
+\centering
+\includegraphics{dual1.png}    \includegraphics{dual2.png}
+\caption{Here are two examples of triangulation, the one on the left is a Delaunay triangulation, the one on the right is not, because point 3 is inside the circle circumscribed to the triangle formed by points 1,2,4.}
+\label{dual}
+\end{figure}
+
+
+
+
+\paragraph{From Delaunay to Voronoi in $\mathbb{R}^d$}
+
+
+
+\begin{definition}
+~~$d-Simplex$
+\\A simplex is the convex hull of a set of $(d+1)$ points used to form an affine coordinate system in an affine space of dimension d.
+\end{definition}
+
+\begin{definition}
+~~Open $d-Ball$
+\\The open $d-Ball$ of centre $c_0$ and radius $r$ noted $B^d(c_0,r)$ is defined as : 
+$$ B^d(c_0,r):= \{  p\in\mathbb{R}^d \text{ with } ||c_0-p||< r \}$$
+\end{definition}
+
+\begin{definition}
+~~Delaunay cells
+\\We call Delaunay cell, a simplex denoted $D_i$, which has as vertices $(d+1)$ germs such as there are no other germ inside the open $d-Ball$ generated the these vertices.
+\end{definition}
+
+\begin{definition}
+~~Undirected graph
+\\An undirected  graph G is a pair $(V;E)$, where $V$ is a set and $E$ is a symmetrical binary relation defined on $V$, i.e. $(u,v)\in E \Longrightarrow (v,u)\in E$. The elements of $V$ are called vertices and the elements of $E$ are called the edges of $G$.
+\end{definition}
+
+
+\begin{definition}
+~~Dual graph
+\\The dual graph G' of G, is a graph whose vertices are the faces of the previous graph (including the outer region), and whose edges are the edges of the previous graph, each edge connect the two bordering faces.
+\end{definition}
+
+\begin{figure}[H]
+\centering
+\includegraphics{dual_new.png}
+\caption{Example in 2D of a graph and its dual.}
+\label{dual_new}
+\end{figure}
+
+
+
+\begin{definition}
+~~~Voronoi diagrams
+\\For a set of points $P$, the dual of the Delaunay triangulation is the Voronoi diagram.
+\end{definition}
+
+\begin{definition}
+~~~Voronoi cells
+\\We can deduce that the Voronoi cell $C_i$ is the convex hull of all the centers of the circumscribed circles generated by the simplexes of the germ $p_i$.
+\end{definition}
+
+
+
+The algorithm of Guibas and Stolfi has been used. This algorithm is based on the principle of divide-and-conquer, which allows us to have an algorithmic complexity of $O(nln(n))$ where $n$ is the number of points, which will allow us to work on a large number of data.
+
+
+
+
+\subsubsection{Area of Voronoi cells of randomly distributed particules}
+
+We will calculate the area of Voronoi cells following an uniform distribution, knowing that this is the initial condition before the turbulence.
+
+
+
+\begin{definition}
+~~Gamma distribution 
+\\A random variable X that is gamma-distributed with shape $k$ and rate $\theta$ is denoted
+$$ X \sim \Gamma(k,\theta) $$
+The corresponding probability density function in the shape-rate parametrization is 
+$$ f(x;k,\theta)=\frac{x^{k-1}e^{-\frac{x}{\theta}}}{\Gamma(k)\theta^k} $$
+\end{definition}
+
+\begin{propertie}
+The area of Voronoi cells following a uniform distribution follows a Gamma distribution.
+\end{propertie}
+
+\begin{demonstration}
+~~In 1D
+\\demonstration
+\end{demonstration}
+
+
+
+
+
+\subsection{Monte-Carlo simulation of particles}
+
+
+\begin{center}
+	\includegraphics[width=16cm]{Rand_Poisson_10.eps}
+	\\\textit{In black a Poisson density of parameter $\lambda = 10$, in red the density of 10000000 points with 1000$\times$1000 subdivisions.}
+\end{center}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics{rand_vor_gamma.png}
+\caption{Area of Voronoi cells normalized by the mean for a uniform distribution and a Gamma distribution, fitted the least squares method.}
+\label{rand_vor_gamma}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Analysis of clustering of intertial particles in turbulence}
+
+
+
+\subsection{Inertial particles in turbulence}
+
+In this subsection we will compute the density of particles in turbulence for different Stokes numbers and then for different Reynolds numbers.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{St005_dens.eps}
+\includegraphics[width=8cm]{St02_dens.eps}\\
+\includegraphics[width=8cm]{St1_dens.eps}
+\includegraphics[width=8cm]{St5_dens.eps}
+\caption{Particle density as a function of the density in log-log representation for different Stokes numbers (St=0.05,0.2,1,5) and at different time instants at $Re_\lambda$=204.}
+\label{Stabilite_St_dens}
+\end{figure}
+
+We observe that the density for a same Stokes number at different times is stable. So we can compare the density for different Stokes numbers and analyse the influence of the Stokes number on the density. And because the density for a same Stokes number at different times is stable, we will take the mean of the densities to get more accurate results.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=16cm]{StAll_dens.eps}
+\caption{Histogram of the density of particles using a logarithmic scale and Poisson distribution (with $\lambda=7$) of the random particle (without flow).}
+\label{StAll_dens}
+\end{figure}
+
+
+For $St = 0.05$ the distribution is indeed close to the Poissonian distribution as expected. When the Stokes number becomes larger, the number of dense areas and void areas increase. This implies that the particles are not uniformely distributed any more and the histogram differs from the Poisson distribution.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{St05_dens_Re.eps}
+\includegraphics[width=8cm]{St1_dens_Re.eps}\\
+\includegraphics[width=8cm]{St2_dens_Re.eps}
+\includegraphics[width=8cm]{St5_dens_Re.eps}
+\caption{Different density for Re=204 in blue and Re=328 in red for ST=0.05,1,2 and 5.}
+\label{diff_RE_ALL_dens}
+\end{figure}
+
+We observe that the influence of the Reynolds number on the density pretty weak.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Inertial particules in turbulence}
+
+In this subsection we will calculate the area of Voronoi cells after the turbulence for different Stokes numbers and then for different Reynolds numbers. For this section when we speak about standard deviation or mean, we speak about the standard deviation and the mean of the logarithme of the area.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{St005_Vor.eps}
+\includegraphics[width=8cm]{St02_Vor.eps}\\
+\includegraphics[width=8cm]{St1_Vor.eps}
+\includegraphics[width=8cm]{St5_Vor.eps}
+\caption{Different area of Voronoi cell at different times.}
+\label{Stabilite_St_vor}
+\end{figure}
+
+The area of Voronoi cells is stable for a same Stokes number at different times. So we can compare the different Stokes numbers and analyse the influence of the Stokes number on the area of Voronoi cells.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=16cm]{StAll_Vor.eps}
+\caption{Histogram of the area of Voronoi cell using a logarithmic scale normaled by the mean.}
+\label{StAll_Vor}
+\end{figure}
+
+As expected, we can observe that for $St = 1$ the standard deviation is largest  and, for $St > 1 $ and $St < 1 $ the standard deviation smaller.
+
+When the Stokes number increases to get closer to 1, we can see that the number of small Voronoi cell (to the left of the figure) increase, and decrease after exceeding 1. The number of the large Voronoi cell (to the right of the figure) increase when the Stokes number increases to get closer to 1, but after exceeding 1 the largest voronoi cell continu to increases even if the number of lage cell decrease for $St = 5$. We can also see that the number of cell with a mean size increase in contrust to $ST = 2$.
+
+
+{\noindent
+\\\\\\\\We can try to approch the PDF with a Log-normal distribution.
+}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{St005_Vor_normal.eps}
+\includegraphics[width=8cm]{St02_Vor_normal.eps}\\
+\includegraphics[width=8cm]{St1_Vor_normal.eps}
+\includegraphics[width=8cm]{St5_Vor_normal.eps}
+\caption{Different area of Voronoi cell for Re=204 and the corresponding Log-normal distribution.}
+\label{log-norm_st}
+\end{figure}
+
+
+We can conclude that the area of Voronoi cells clearly does not follow the Log-normal distribution even if the Log-normal distribution is pretty close to the PDF when the Stokes number is close to $1$. This aspect becomes much more visible for the 3D data (cf. annex 1).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{St05_Vor_Re.eps}
+\includegraphics[width=8cm]{St1_Vor_Re.eps}\\
+\includegraphics[width=8cm]{St2_Vor_Re.eps}
+\includegraphics[width=8cm]{St5_Vor_Re.eps}
+\caption{Different area of Voronoi cell for Re=204 in blue and Re=328 in red for ST=0.05,1,2 and 5.}
+\label{diff_RE_ALL_vor}
+\end{figure}
+
+
+We can see that Reynolds number have an influence on  the number of large area of Voronoi cells.
+
+
+
+
+\section{Conclusion}
+
+Stokes : influence on the clustering
+Reynolds : influence on the size of the cluster
+
+
+
+
+\newpage
+
+\begin{thebibliography}{9}
+
+\bibitem{latexcompanion}
+Michel Goossens, Frank Mittelbach, and Alexander Samarin.
+\textit{The \LaTeX\ Companion}.
+Addison-Wesley, Reading, Massachusetts, 1993.
+
+\bibitem{einstein}
+Albert Einstein.
+\textit{Zur Elektrodynamik bewegter K{\"o}rper}. (German)
+[\textit{On the electrodynamics of moving bodies}].
+Annalen der Physik, 322(10):891921, 1905.
+
+\bibitem{knuthwebsite}
+Knuth: Computers and Typesetting,
+\\\texttt{http://www-cs-faculty.stanford.edu/\~{}uno/abcde.html}
+
+\bibitem{Keigo}
+K. Matsuda, R. Onishi and K. Takahashi.
+\textit{Influence of microscale turbulent droplet clustering on radar cloud observations.}.
+J. Atmos. Sci., 71, 3569, 2014
+
+
+\end{thebibliography}
+
+On the size distribution of Poisson Voronoi cells Ferenc and Neda
+\\\\K. Matsuda, R. Onishi and K. Takahashi. Influence of microscale turbulent droplet clustering on radar cloud observations. J. Atmos. Sci., 71, 3569, 2014
+\\\\M. Bassenne, J. Urzay, K. Schneider and P. Moin. Extraction of coherent clusters and grid adaptation in particle-laden turbulence using wavelet filters. Phys. Rev. Fluids, 2, 054301, 2017.
+\\\\You can find all the developed python codes at : https://github.com/Moli-ou/Turbulent-particle-clustering
+
+\newpage
+\begin{center}
+	\includegraphics{005.png}
+	\\\textit{St = 0.05}
+\end{center}
+\begin{center}
+	\includegraphics{02.png}
+	\\\textit{St = 0.2}
+\end{center}
+\newpage
+\begin{center}
+	\includegraphics{1.png}
+	\\\textit{St = 1}
+\end{center}
+\begin{center}
+	\includegraphics{5.png}
+	\\\textit{St = 5}
+\end{center}
+
+
+\end{document}

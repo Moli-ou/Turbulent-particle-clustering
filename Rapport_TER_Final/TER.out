@@ -1,0 +1,14 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Inertial particles in turbulence and direct numerical simulation }{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Governing equations and characteristic parameters }{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Description of the data sets }{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Statistical tools and Voronoi tesselation }{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Density of randomly distributed particules}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Voronoi tesselation}{section.3}% 7
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Construction of the Voronoi diagram}{subsection.3.2}% 8
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Area of Voronoi cells of randomly distributed particules}{subsection.3.2}% 9
+\BOOKMARK [2][-]{subsection.3.3}{Monte-Carlo simulation of particles}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Analysis of clustering of intertial particles in turbulence}{}% 11
+\BOOKMARK [2][-]{subsection.4.1}{Inertial particles in turbulence}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.2}{Inertial particules in turbulence}{section.4}% 13
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 14
