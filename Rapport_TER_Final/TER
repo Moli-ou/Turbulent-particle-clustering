@@ -22,7 +22,7 @@
 \newtheorem{lemma}{{\bf Lemme}}
 \newtheorem{proposition}{{\bf Proposition}}
 \newtheorem{definition}{{\bf Definition}}
-\newtheorem{propertie}{{\bf Proposition}}
+\newtheorem{propertie}{{\bf Property}}
 \newtheorem{demonstration}{{\bf Proof}}
 \newtheorem{remarque}{{\bf Note}}
 \textwidth = 16.5cm
@@ -99,13 +99,13 @@
 \newpage
 
 \section{Introduction}
-The role of clouds in the Earth's heat and water systems is significant.
-A large number of observations are made, using e.g. radar reflectometry, to study the microphysical properties of clouds. Radar is a tool that can provide two- or three-dimensional estimates of these properties. These investigations suggest that turbulence plays a keyrole and has strong impact on the properties obtained from radar observations. For example the radar reflectivity factor increases significantly due to the formation of turbulent clusters. However, until now, there was no reliable way to estimate this influence. The objective of the study whose data \cite{Keigo} we will study, was to analyze the impact of microscale turbulent clustering on the radar reflectivity factor by means of direct numerical simulation and to construct a reliable model for estimating it. 
-\\Starting with point particles, which are arranged randomly in a cube filled with a fluid and with a density satisfying a Poisson distribution, we apply a fully developed turbulent flow. After a given time and depending on the parameters, we can observe that void areas form and areas where the particles are grouped together, so called particle clusters. The different parameters used are the Reynolds number that characterizes the turbulence intensity, and the Stokes number that characterizes the inertia and thus the ability of a particle to follow the motion of the fluid. The purpose of this research project (TER : Travail Encadr\'e de Recherche) is to quantify the void areas of the direct numerical simulation data of \cite{Keigo} and to characterize the clustering using statistical tools. To do this, we will use two methods: density estimation and Voronoi tesselation for different Reynolds number and Stokes number values. The analyzes are based on direction umerical simulation data from \cite{Keigo} and the scientific articles of our research tutors.
-\\The remainder of the report is organized as follows. 
+~~~ The role of clouds in the Earth's heat and water systems is significant.
+A large number of observations are made, using e.g. radar reflectometry, to study the microphysical properties of clouds. Radar is a tool that can provide two- or three-dimensional estimates of these properties. Studies suggest that turbulence plays a keyrole and has strong impact on the properties obtained from radar observations. For example the radar reflectivity factor increases significantly due to the formation of turbulent clusters. Moreover, the mechanism for rain formation corresponds to clustering of droplets. However, until now, there was no reliable way to estimate this influence. The objective of the study whose data \cite{Keigo} we will study, was to analyze the impact of microscale turbulent clustering on the radar reflectivity factor by means of direct numerical simulation and to construct a reliable model for estimating it. 
+\par Starting with point particles, which are arranged randomly in a cube filled with a fluid and with a density satisfying a Poisson distribution, we apply a fully developed turbulent flow. After a given time and depending on the parameters, we can observe that void areas form and areas where the particles are grouped together, so called particle clusters. The different parameters used are the Reynolds number that characterizes the turbulence intensity, and the Stokes number that characterizes the inertia and thus the ability of a particle to follow the motion of the fluid. The purpose of this research project (TER : Travail Encadr\'e de Recherche) is to quantify the void areas of the direct numerical simulation data of \cite{Keigo} and to characterize the clustering using statistical tools. To do this, we will use two methods: density estimation and Voronoi tesselation for different Reynolds number and Stokes number values. The analyzes are based on direction umerical simulation data from \cite{Keigo} and the scientific articles of our research tutors.
+\par The remainder of the report is organized as follows. 
 In the second section, we will look at the physical principles that govern the simulation and a description of the data set.
 In the third section, we show that the density of uniformly distributed random particles gives a Poisson distribution. Then we will see the construction of Voronoi diagrams. We also prove that the volume distribution of the corresponding Voronoi tesselation satisfies a Gamma distribution in 1D. We confirm the previous results via Monte-Carlo simulations in 2D for density and in 3D for Voronoi tesselation.
-Finally, in the fourth section, we will analyze using the two tools precisely seen, the distribution of inertial particles in turbulence for different numbers of Stokes and Reynolds.
+Finally, in the fourth section, we will analyze using the two tools precisely seen, the distribution of inertial particles in turbulence for different Stokes numbers and Reynolds numbers.
 
 
 
@@ -169,7 +169,7 @@ $$\tau_{inertia}=\frac{L}{v}$$
 
 \begin{definition}
 ~~Stokes number
-\\The Stokes number is used to study the behaviour of a particle in a fluid.  It represents the ratio between the kinetic energy of the particle and the energy dissipated by friction with the fluid. Thus, the Stokes number characterizes the inertia of a particle in a fluid. The more inertia a particle has, the larger the Stokes number will be. If $St=0$ the particle has no mass and we call it a fluid particle.. The Stokes number is defined as :
+\\The Stokes number is used to study the behaviour of a particle in a fluid.  It represents the ratio between the kinetic energy of the particle and the energy dissipated by friction with the fluid. Thus, the Stokes number characterizes the inertia of a particle in a fluid. The more inertia a particle has, the larger the Stokes number will be. If $St=0$ the particle has no mass and we call it a fluid particle. The Stokes number is defined as :
 $$St=\frac{\tau_{viscous}}{\tau_{inertia}}$$
 \end{definition}
 {\noindent
@@ -195,8 +195,7 @@ $$\frac{\partial u_i}{\partial t}+\frac{\partial u_i u_j}{\partial x_j}=-\frac{1
 
 
 
-\subsection{Description of the data sets
-}
+\subsection{Description of the data sets}
 
 
 
@@ -214,15 +213,19 @@ where :
 \begin{figure}[H]
 \centering
 \includegraphics[width=8cm]{St005_image.eps}
-\caption{Spatial distribution of droplets for $St=0.005,0.02,1,5$ at $Re_\lambda=204$ for a slice of thickness $\frac{2*\pi}{200}$}
+\includegraphics[width=8cm]{St02_image.eps} \\
+\includegraphics[width=8cm]{St1_image.eps}
+\includegraphics[width=8cm]{St5_image.eps}
+\caption{Spatial distribution of droplets for $St=0.005,0.02,1,5$ at $Re_\lambda=204$ for a slice of thickness $\frac{2\pi}{200}$}
 \label{Spatial_distribution_of_dropets_St}
 \end{figure}
 
-In the Figure~\ref{Spatial_distribution_of_dropets_St}, for St = 1.0, we can clearly observe void areas. For St < 1.0, the void areas are less clear. For St > 1.0, they are larger but less clear than St = 1.0. We can ask ourselves how to quantify the clustering in fonction of the Stokes and Reynolds number using statistical tools.
+In the figure~\ref{Spatial_distribution_of_dropets_St}, for St $=$ 1.0, we can clearly observe void areas. For St $<$ 1.0, the void areas are less clear. For St $>$ 1.0, they are larger but less clear than St $=$ 1.0. We can ask ourselves how to quantify the clustering in fonction of the Stokes and Reynolds number using statistical tools.
 \\\\We will also study a turbulence of $Re_\lambda=328$, to compare the influence of the Reynolds number on the distribution of particules.
 
 \begin{figure}[H]
 \centering
+\includegraphics[width=8cm]{St204_image.eps}
 \includegraphics[width=8cm]{Re328_image.png}
 \caption{Spatial distribution of dropets for $St=1$ at (a)$Re_\lambda=204$ and  (b)$Re_\lambda=328$ for a slice of thickness $\frac{2*\pi}{200}$}
 \label{Spatial_distribution_of_dropets_Re}
@@ -247,10 +250,10 @@ In figure~\ref{Spatial_distribution_of_dropets_Re}, we can see that cluster size
 We will compute the particle density following an uniform distribution, knowing that this is the initial condition before the turbulence.
 To compute the density estimation using histogram, we have cut domain in boxes and counting the number of particles per boxes. 
 
-\begin{propertie}
+\begin{proposition}
 The density of uniformly distributed particles follows a Poisson distribution.
 $$B(n,p)=P(\lambda) \text{ with $\lambda=np$}$$ where n is the number of particules and p is $1$ divided by the numbers of boxes.
-\end{propertie}
+\end{proposition}
 
 
 
@@ -259,7 +262,8 @@ $$B(n,p)=P(\lambda) \text{ with $\lambda=np$}$$ where n is the number of particu
 
 The density of an uniform distribution follows a binomial distribution because we independently repeat several identical random experiments.
 Let X follow a binomial distribution with parameter n and p.
-\\\\Let $\lambda=np$, then we have :
+\\Let $\lambda=np$, then we have :
+
 
 \begin{align*}
 \mathbb{P}(X=k) &= {\dbinom{n}{k}}p^k(1-p)^{n-k} \\ 
@@ -267,11 +271,9 @@ Let X follow a binomial distribution with parameter n and p.
 &=\frac{\lambda^k}{k!}\frac{n!}{(n-k)!}\frac{1}{n^k} \left(1-\frac{\lambda}{n}\right)^{n-k}
 ~~ = ~~\frac{\lambda^k}{k!}\frac{n!}{(n-k)!}\frac{1}{n^n} (n-k)^{n-k}
 \end{align*} 
-
-Stirling's approximation give us : $$ n!\approx \sqrt{2\pi n}\left( \frac{n}{e}\right)^n $$
+\\Stirling's approximation give us : $$ n!\approx \sqrt{2\pi n}\left( \frac{n}{e}\right)^n $$
 $$ \frac{n!}{(n-k)!}\approx \sqrt{\frac{n}{n-k}}\frac{n^n}{(n-k)^{n-k}}e^{-k} $$
-
-Considering the limit when the particle number tends to infinity we get :
+\\Considering the limit when the particle number tends to infinity we get :
 
 \begin{align*}
 \lim\limits_{n \rightarrow +\infty} \frac{\lambda^k}{k!}\frac{n!}{(n-k)!}\frac{1}{n^n} (n-k)^{n-k} 
@@ -286,6 +288,7 @@ Considering the limit when the particle number tends to infinity we get :
 \\And $$\lim\limits_{n \rightarrow +\infty} \frac{\lambda^k}{k!} \left( \frac{n-\lambda}{n-k}\right)^{n-k}e^{-k} = \frac{\lambda^k}{k!} e^{-\lambda}$$
 \\We can conclude that when $n\rightarrow +\infty$ and $p\rightarrow 0$ with $\lambda$ a finite number : $$B(n,p)=P(np)=P(\lambda)$$
 
+\label{dem1}
 
 \end{demonstration}
 
@@ -353,17 +356,15 @@ A Voronoi diagram shows the following properties :
 A Voronoi edge, separating two Voronoi cells $C_i$ and $C_j$, is the perpendicular bisector $p_ip_j$.
 \end{propertie}
 
-\begin{demonstration}
+\paragraph{Proof.}
 All points on this Voronoi edge are at equal distance of $p_i$ and $p_j$. So they are on the perpendicular bisector $p_ip_j$.
-\end{demonstration}
 
 \begin{propertie}
 The Voronoi vertex common to three cells $C_i$, $C_j$ and $C_k$ is the centre of the circumscribed circle to the triangle of vertices $p_i$, $p_j$ and $p_k$.
 \end{propertie}
 
-\begin{demonstration}
+\paragraph{Proof.}
 The intersection points of two Voronoi edges are on the perpendicular bisector $p_ip_j$ and $p_jp_k$, so it is the center of the circumscribed circle.
-\end{demonstration}
 
 \begin{remarque}
 If the points $p_i$, $p_j$ and $p_k$ are aligned, the perpendicular bisector $p_ip_j$ and $p_ip_k$ are parallel. The Voronoi vertex does not exist.
@@ -373,9 +374,8 @@ If the points $p_i$, $p_j$ and $p_k$ are aligned, the perpendicular bisector $p_
 A Voronoi diagram is a convex subdivision of plane. A bounded  Voronoi cell is a polygon.
 \end{propertie}
 
-\begin{demonstration}
+\paragraph{Proof.}
 $C_i$ is the intersection of a finite number of half-plane, so it is a convex region. The border is made up of a series of Voronoi edges and Voronoi vertex. If $C_i$ is bounded, its boundary is closed; $C_i$ is therefore a convex polygon.
-\end{demonstration}
 
 
 
@@ -475,26 +475,49 @@ The corresponding probability density function in the shape-rate parametrization
 $$ f(x;k,\theta)=\frac{x^{k-1}e^{-\frac{x}{\theta}}}{\Gamma(k)\theta^k} $$
 \end{definition}
 
-\begin{propertie}
+\begin{proposition}
 The area of Voronoi cells following a uniform distribution follows a Gamma distribution.
-\end{propertie}
+\end{proposition}
 
 \begin{demonstration}
 ~~In 1D
-\\demonstration
+\\Let $L$ a length with $N$ germs randomly distributed.
+\\Let $\Delta$ the density of germ, $\Delta=N/L=1/\bar{\lambda}$ where $\bar{\lambda}$ is the average distance between germs. We have see in proof~\ref{dem1}, that the density of randomly distributed germs follow a Poisson distribution if $N\rightarrow +\infty$ and $L\rightarrow +\infty$ with $\Delta$ a finite number. 
+\\\\So the probability to have N germs inside a length $t$ follows a Poisson distribution with parameter $\Delta t$ and is given by : 
+\[  P(N,t)=\frac{(\Delta t)^N}{N!}e^{\Delta t}  \]
+\\Let $\lambda_r$ and $\lambda_l$ respectively the distance of the first neighbor at the right and the first neighbor at the left. 
+\\Let the cumulative distribution $$G_{\lambda_r}(\lambda)=P[\lambda_r \le \lambda]=1-P[\lambda_r > t] $$
+The probability that there are no germs at a distance strictly less than $t$ is the same as the probability that there are no germs at a length $t$, so :
+\[  P[{\lambda_r} > t] = P(0,t) = e^{-\Delta t}  \]
+So we can deduce : 
+\[  \frac{\partial G_{\lambda_r}(\lambda)}{\partial\lambda} = g_{\lambda_r}(\lambda) = -\frac{\partial P[\lambda_r > \lambda]}{\partial\lambda} = \Delta e^{-\Delta \lambda}  \]
+Because of symmetry we have $g_{\lambda_r}(\lambda)=g_{\lambda_l}(\lambda)$.
+\\The distribution function for the half of these intervals is given by :
+\[  g_{\lambda_l /2}(\lambda)=g_{\lambda_r /2}(\lambda)= 2\Delta e^{- 2 \Delta \lambda}  \]
+Let the length $\Lambda = \lambda_l/2+\lambda_r/2$ ($\lambda_l/2\in [0;\Lambda] \text{ and } \lambda_r/2\in [0;\Lambda]$). Its distribution, $g(\Lambda)$ can be calculated as the convolution of two distributions : 
+\[  g(\Lambda)=\int_{0}^{\Lambda} g_{\lambda_r /2}(\lambda)g_{\lambda_l /2}(\Lambda-\lambda)d\lambda=4\Delta^2 e^{- 2 \Delta \lambda}\Lambda  \]
+We will normalize the function to have : $$\int_{0}^{\infty} g(\Lambda) d\Lambda = 1 $$
+Let $y=\Lambda\Delta$, after normalization we have : 
+\[  f_{1D}(y)=4ye^{-2y}  \]
 \end{demonstration}
-
-
-
+{\noindent
+\\Currently, all attempts to prove analytically that the areas of the Voronoi cells of randomly distributed particles follow a Gamma distribution have failed.
+}
 
 
 \subsection{Monte-Carlo simulation of particles}
 
 
-\begin{center}
-	\includegraphics[width=16cm]{Rand_Poisson_10.eps}
-	\\\textit{In black a Poisson density of parameter $\lambda = 10$, in red the density of 10000000 points with 1000$\times$1000 subdivisions.}
-\end{center}
+Monte Carlo methods are a class of computer algorithms that rely on repeated random sampling to obtain numerical results. 
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=16cm]{Rand_Poisson_10.eps}
+\caption{In black a Poisson density of parameter $\lambda = 10$, in red the density of $10\times 10^6$ points with 1000$\times$1000 subdivisions.}
+\label{Rand_Poisson_10}
+\end{figure}
+We can see that as we have prove it (proof~\ref{dem1}) the density of uniformly distributed points follows a Poisson distribution
 
 
 \begin{figure}[H]
@@ -504,8 +527,7 @@ The area of Voronoi cells following a uniform distribution follows a Gamma distr
 \label{rand_vor_gamma}
 \end{figure}
 
-
-
+Figure~\ref{rand_vor_gamma} shows the area of Voronoi cells normalized by the mean for $15\times 10^6$ randomly distributed points in a periodic cube with side of length $2\pi$. This result was made possible by using of the Mesocentre in Marseille. We can see that the area of Voronoi cells for a uniform distribution also follow a Gamma distribution in 3D. We can suppose that $\forall n\in\mathbb{N}^*$ the area of Voronoi cells of randomly distributed points in $\mathbb{R}^n$ follow a Gamma distribution.
 
 
 
@@ -535,11 +557,14 @@ The area of Voronoi cells following a uniform distribution follows a Gamma distr
 
 \section{Analysis of clustering of intertial particles in turbulence}
 
+Afterwards, we will take a projection of a section of the 3D domain studied. You can find some analyses of 3D data on annex 1. We will use the two methods previously seen to quantify the clustering to highlight the influence of the Stokes and Reynolds number. Firstly, we will use density estimation, this will allow to quantify the empty areas by the empty boxes or almost and clusters by very high density boxes. Secondly, we will use the Voronoi tesselation, indeed the more the particles are grouped, the smaller the area of their cell will be.
 
 
-\subsection{Inertial particles in turbulence}
 
-In this subsection we will compute the density of particles in turbulence for different Stokes numbers and then for different Reynolds numbers.
+\subsection{Density of inertial particules in turbulence}
+
+In this subsection we will compute the density of particles in turbulence for different Stokes numbers and then for different Reynolds numbers. To compute the density estimation using histogram, we have cut domain in boxes of size less than the size of cluster and counting the number of particles per boxes. This will allow to quantify the empty areas by the empty boxes or almost and clusters by very high density boxes.
+\\For $Re_\lambda$=204 we will use $100\times 100$ subdivisions and for $Re_\lambda$=328  we will use $200\times 200$. Obviously we will adjust the number of particules for the comparisons between the two Reynolds numbers.
 
 \begin{figure}[H]
 \centering
@@ -556,12 +581,13 @@ We observe that the density for a same Stokes number at different times is stabl
 \begin{figure}[H]
 \centering
 \includegraphics[width=16cm]{StAll_dens.eps}
-\caption{Histogram of the density of particles using a logarithmic scale and Poisson distribution (with $\lambda=7$) of the random particle (without flow).}
+\caption{Histogram of the density of particles using a logarithmic scale and Poisson distribution (with $\lambda=7$) of the random particles (without flow).}
 \label{StAll_dens}
 \end{figure}
 
 
-For $St = 0.05$ the distribution is indeed close to the Poissonian distribution as expected. When the Stokes number becomes larger, the number of dense areas and void areas increase. This implies that the particles are not uniformely distributed any more and the histogram differs from the Poisson distribution.
+For $St = 0.05$ the distribution is indeed close to the Poissonian distribution, as expected. When the Stokes number becomes larger, the number of dense areas and void areas increase. This implies that the particles are not uniformely distributed any more and the histogram differs from the Poisson distribution.
+\\\\
 
 \begin{figure}[H]
 \centering
@@ -573,7 +599,7 @@ For $St = 0.05$ the distribution is indeed close to the Poissonian distribution 
 \label{diff_RE_ALL_dens}
 \end{figure}
 
-We observe that the influence of the Reynolds number on the density pretty weak.
+We observe that the Reynolds number have an influence on the size of the cluster. For a strong turbulence we have smaller void areas.
 
 
 
@@ -591,7 +617,7 @@ We observe that the influence of the Reynolds number on the density pretty weak.
 
 
 
-\subsection{Inertial particules in turbulence}
+\subsection{Area of Voronoi cells Inertial particules in turbulence}
 
 In this subsection we will calculate the area of Voronoi cells after the turbulence for different Stokes numbers and then for different Reynolds numbers. For this section when we speak about standard deviation or mean, we speak about the standard deviation and the mean of the logarithme of the area.
 
@@ -605,7 +631,7 @@ In this subsection we will calculate the area of Voronoi cells after the turbule
 \label{Stabilite_St_vor}
 \end{figure}
 
-The area of Voronoi cells is stable for a same Stokes number at different times. So we can compare the different Stokes numbers and analyse the influence of the Stokes number on the area of Voronoi cells.
+Figure~\ref{Stabilite_St_vor} shows that the area of Voronoi cells is stable for a same Stokes number at different times. So we can compare the different Stokes numbers and analyse the influence of the Stokes number on the area of Voronoi cells.
 
 
 \begin{figure}[H]
@@ -643,12 +669,12 @@ We can conclude that the area of Voronoi cells clearly does not follow the Log-n
 \includegraphics[width=8cm]{St1_Vor_Re.eps}\\
 \includegraphics[width=8cm]{St2_Vor_Re.eps}
 \includegraphics[width=8cm]{St5_Vor_Re.eps}
-\caption{Different area of Voronoi cell for Re=204 in blue and Re=328 in red for ST=0.05,1,2 and 5.}
+\caption{Different areas of Voronoi cells for Re=204 in blue and Re=328 in red for ST=0.05,1,2 and 5.}
 \label{diff_RE_ALL_vor}
 \end{figure}
 
 
-We can see that Reynolds number have an influence on  the number of large area of Voronoi cells.
+We can see that Reynolds number have an influence on  the number of large areas of Voronoi cells.
 
 
 
@@ -665,35 +691,39 @@ Reynolds : influence on the size of the cluster
 
 \begin{thebibliography}{9}
 
-\bibitem{latexcompanion}
-Michel Goossens, Frank Mittelbach, and Alexander Samarin.
-\textit{The \LaTeX\ Companion}.
-Addison-Wesley, Reading, Massachusetts, 1993.
 
-\bibitem{einstein}
-Albert Einstein.
-\textit{Zur Elektrodynamik bewegter K{\"o}rper}. (German)
-[\textit{On the electrodynamics of moving bodies}].
-Annalen der Physik, 322(10):891921, 1905.
-
-\bibitem{knuthwebsite}
-Knuth: Computers and Typesetting,
-\\\texttt{http://www-cs-faculty.stanford.edu/\~{}uno/abcde.html}
 
 \bibitem{Keigo}
-K. Matsuda, R. Onishi and K. Takahashi.
-\textit{Influence of microscale turbulent droplet clustering on radar cloud observations.}.
+K. Matsuda, R. Onishi and K. Takahashi,
+\textit{Influence of microscale turbulent droplet clustering on radar cloud observations.}
 J. Atmos. Sci., 71, 3569, 2014
+
+\bibitem{Kai}
+M. Bassenne, J. Urzay, K. Schneider and P. Moin,
+\textit{Extraction of coherent clusters and grid adaptation in particle-laden turbulence using wavelet filters.}
+Phys. Rev. Fluids, 2, 054301, 2017.
+
+\bibitem{Keigo}
+J-S. Ferenc, Z. N\`eda,
+\textit{On the size distribution of Poisson Voronoi cells Ferenc and Neda.}
+
 
 
 \end{thebibliography}
 
-On the size distribution of Poisson Voronoi cells Ferenc and Neda
-\\\\K. Matsuda, R. Onishi and K. Takahashi. Influence of microscale turbulent droplet clustering on radar cloud observations. J. Atmos. Sci., 71, 3569, 2014
-\\\\M. Bassenne, J. Urzay, K. Schneider and P. Moin. Extraction of coherent clusters and grid adaptation in particle-laden turbulence using wavelet filters. Phys. Rev. Fluids, 2, 054301, 2017.
-\\\\You can find all the developed python codes at : https://github.com/Moli-ou/Turbulent-particle-clustering
+
+
+You can find all the developed python codes at : https://github.com/Moli-ou/Turbulent-particle-clustering
+
+
+
+
 
 \newpage
+
+
+
+
 \begin{center}
 	\includegraphics{005.png}
 	\\\textit{St = 0.05}
